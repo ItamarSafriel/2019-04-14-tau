@@ -4,6 +4,21 @@
 * notebooks should be saved to notebooks/<lesson>
 * scripts should be saved to scripts/<lesson>
 
+# To Update Website:
+* clone repo
+* edit files (see below for where to find things)
+* request edit permissions or create a pull request
+* push to or create PR on gh-pages branch
+
+## Commonly edited pages:
+* index.md : this is where most of the high level workshop details live
+* _includes/sc/who.html: describes learners
+* _includes/sc/schedule.html: schedule
+* _includes/sc/syllabus.html: syllabus (description of lessons)
+* _includes/sc/intro.html: description of workshop
+* setup/index.md: directions for installation testing scripts
+* setup/swc-installation-test-?.py: testing scripts
+
 # workshop-template
 
 This repository is The Carpentries' ([Software Carpentry][swc-site], [Data Carpentry][dc-site], and [Library Carpentry][lc-site]'s)
