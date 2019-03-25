@@ -11,7 +11,7 @@
 * push to or create PR on gh-pages branch
 
 ## Commonly edited pages:
-* index.md : this is where most of the high level workshop details live
+* index.md : high level workshop details and installation instructions
 * _includes/sc/who.html: describes learners
 * _includes/sc/schedule.html: schedule
 * _includes/sc/syllabus.html: syllabus (description of lessons)
