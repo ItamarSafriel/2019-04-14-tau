@@ -691,3 +691,25 @@ please preview your site before committing, and make sure to run
       Instructors will provide a workaround for it if needed.</strong></p>
 </div> {% comment %} End of 'SQLite' section. {% endcomment %}
 
+<div id="python"> {% comment %} Start of 'emcee' section. {% endcomment %}
+  <h3><code>emcee</code> and <code>corner.py</code></h3>
+
+  <p>
+    <a href="https://emcee.readthedocs.io/"><code>emcee</code></a> is an pure-Python implementation of a
+    Markov chain Monte Carlo (MCMC) Ensemble sampler written by Dan Foreman-Mackey. It's designed for Bayesian 
+    parameter estimation and it's really sweet! <code>corner.py</code> (also by Dan Foreman-Mackey) makes it very easy 
+    to plot results from <code>emcee</code>.
+  </p>
+
+  <p>
+    Now that you've installed Python, it's very easy to install them both. If you installed Anaconda, run
+    <code>conda install -c conda-forge emcee corner</code>. For any other version of Python, run
+    <code>pip install emcee corner</code>. 
+  </p>
+
+  <p>
+    To check if this worked, run <code>python -c 'import emcee, corner'</code>. If that returns without errors,
+    you're all set!
+  </p>
+
+</div> {% comment %} End of 'emcee' section. {% endcomment %}
