@@ -527,6 +527,9 @@ please preview your site before committing, and make sure to run
     a bit difficult, so we recommend
     <a href="https://www.anaconda.com/distribution/">Anaconda</a>,
     an all-in-one installer.
+  <b>If you have already installed Anaconda (or Astroconda), then you
+  do not need to installed it again.</b> You can create an environment for this
+  class with the following command: <code>conda create -n py37 python=3.7 anaconda</code>
   </p>
 
   <p>
