@@ -6,13 +6,13 @@ venue: "21st Century Software and Data Analysis Tools for Physics and Astronomy"
 address: "Wolfson 206 (Enginerring Building) and Kaplun 118 (Physics Building), Tel Aviv University (see schedule for details)"      # full street address of workshop (e.g., "Room A, 123 Forth Street, Blimingen, Euphoria")
 country: "il"      # lowercase two-letter ISO country code such as "fr" (see https://en.wikipedia.org/wiki/ISO_3166-1#Current_codes)
 language: "en"     # lowercase two-letter ISO language code such as "fr" (see https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)
-latlng: "32.073580,34.788050"       # decimal latitude and longitude of workshop venue (e.g., "41.7901128,-87.6007318" - use https://www.latlong.net/)
+latlng: ""       # decimal latitude and longitude of workshop venue (e.g., "41.7901128,-87.6007318" - use https://www.latlong.net/)
 humandate: "Apr 14-18, 2019"    # human-readable dates for the workshop (e.g., "Feb 17-18, 2020")
 humantime: "9:00am - 5:00pm"    # human-readable times for the workshop (e.g., "9:00 am - 4:30 pm")
 startdate: 2019-04-14      # machine-readable start date for the workshop in YYYY-MM-DD format like 2015-01-01
 enddate: 2019-04-18        # machine-readable end date for the workshop in YYYY-MM-DD format like 2015-01-02
 instructor: ["Azalee Bostroem", "Griffin Hosseinzadeh", "Dalya Baron"] # boxed, comma-separated list of instructors' names as strings, like ["Kay McNulty", "Betty Jennings", "Betty Snyder"]
-helper: ["Iair Arcavi"]     # boxed, comma-separated list of helpers' names, like ["Marlyn Wescoff", "Fran Bilas", "Ruth Lichterman"]
+helper: ["Iair Arcavi", "Griffin Hosseinzadeh", "Dalya Baron", "Itamar Reis", "Natalie Lubelchick", "Sahar Shahaf"]     # boxed, comma-separated list of helpers' names, like ["Marlyn Wescoff", "Fran Bilas", "Ruth Lichterman"]
 email: ["arcavi@gmail.com"]    # boxed, comma-separated list of contact email addresses for the host, lead instructor, or whoever else is handling questions, like ["marlyn.wescoff@example.org", "fran.bilas@example.org", "ruth.lichterman@example.org"]
 collaborative_notes: https://pad.carpentries.org/2019-04-14-tau            # optional: URL for the workshop collaborative notes, e.g. an Etherpad or Google Docs document
 eventbrite:           # optional: alphanumeric key for Eventbrite registration, e.g., "1234567890AB" (if Eventbrite is being used)
@@ -85,10 +85,6 @@ address.
 <p id="where">
   <strong>Where:</strong>
   {{page.address}}.
-  Get directions with
-  <a href="//www.openstreetmap.org/?mlat={{page.latlng | replace:',','&mlon='}}&zoom=16">OpenStreetMap</a>
-  or
-  <a href="//maps.google.com/maps?q={{page.latlng}}">Google Maps</a>.
 </p>
 {% endif %}
 
@@ -527,6 +523,9 @@ please preview your site before committing, and make sure to run
     a bit difficult, so we recommend
     <a href="https://www.anaconda.com/distribution/">Anaconda</a>,
     an all-in-one installer.
+  <b>If you have already installed Anaconda (or Astroconda), then you
+  do not need to installed it again.</b> You can create an environment for this
+  class with the following command: <code>conda create -n py37 python=3.7 anaconda</code>
   </p>
 
   <p>
@@ -691,3 +690,26 @@ please preview your site before committing, and make sure to run
       Instructors will provide a workaround for it if needed.</strong></p>
 </div> {% comment %} End of 'SQLite' section. {% endcomment %}
 
+<div id="python"> {% comment %} Start of 'emcee' section. {% endcomment %}
+  <h3>Bayesian Statistics Modules</h3>
+
+  <p>
+    <a href="https://emcee.readthedocs.io/"><code>emcee</code></a> is an pure-Python implementation of a
+    Markov chain Monte Carlo (MCMC) Ensemble sampler designed for Bayesian 
+    parameter estimation. <a href="https://corner.readthedocs.io/"><i>corner</i></a> makes it very easy to plot 
+    results from <code>emcee</code>. <a href="https://george.readthedocs.io/">George</a> is a fast and flexible 
+    Python library for Gaussian Process Regression. All three modules are written by Dan Foreman-Mackey, and much 
+    of this paragraph is plagiarized from his webpages.
+
+  <p>
+    Now that you've installed Python, it's very easy to install all three. If you installed Anaconda, run
+    <code>conda install -c conda-forge emcee corner george</code>. For any other version of Python, run
+    <code>pip install emcee corner george</code>. 
+  </p>
+
+  <p>
+    To check if this worked, run <code>python -c 'import emcee, corner, george'</code>. If that returns without errors,
+    you're all set!
+  </p>
+
+</div> {% comment %} End of 'emcee' section. {% endcomment %}
