@@ -1,0 +1,200 @@
+ΩWelcome to The Carpentries Etherpad!
+This pad is synchronized as you type, so that everyone viewing this page sees the same text. This allows you to collaborate seamlessly on documents.
+Use of this service is restricted to members of The Carpentries community; this is not for general purpose use (for that, try etherpad.wikimedia.org).
+Users are expected to follow our code of conduct: https://docs.carpentries.org/topic_folders/policies/code-of-conduct.html
+All content is publicly available under the Creative Commons Attribution License: https://creativecommons.org/licenses/by/4.0/
+
+21st Century Software and Data Analysis Tools for Physics and Astronomy
+References:
+	* This document: https://pad.carpentries.org/2019-04-14-tau
+	* Our course website: https://abostroem.github.io/2019-04-14-tau/
+	* SWC lessons (shell, git, python(ish)): https://software-carpentry.org/lessons/
+	* Our course repository: https://github.com/abostroem/2019-04-14-tau
+
+ 
+	* https://slides.com/abostroem/shell-exercises
+
+
+
+Sunday:
+Shell Lesson:
+    I assume you know: cd, ls, pwd, mv, cp, mkdir, rm
+    
+git clone https://github.com/abostroem/2019-04-14-tau
+cd 2019-04-14-tau
+cd data
+unzip data-shell.zip
+cd data-shell
+
+Getting help: man command (e.g. man ls), or in git bash (for windows users): command --help (e.g. ls --help). 
+Getting out of help: q
+
+
+cd thesis
+nano draft.txt
+
+ctl+o  write out
+enter 
+ctl+x
+
+cd ../moleculesgit config --global core.editor "nano"
+ls
+
+ls *p*.pdb
+ls ???ane.pdb
+
+wc *.pdb
+(gives number of lines, words, characters per file)
+wc -l *.pdb
+(just number of lines)
+
+cat methane.pdb
+
+wc -l *.pdb > lengths.txt 
+(stores result into text file lengths.txt)
+cat lengths.txt
+
+sort -n lengths.txt
+head lengths.txt (to see just the beginning of the lengths.txt)
+head -n 1 lengths.txt (to see just the first line of lengths.txt)
+head -n 3 lengths.txt (to see just the first three lines of lengths.txt)
+tail lengths.txt (to see the end of the file)
+tail -n 1 lengths.txt (to see the last line of the file)
+
+Printing to the screen or to files:
+    echo hello
+    echo hello > testfile01.txt (overwrites)
+    echo hello >> testfile02.txt (appends)
+
+Piping the output of one command to another with "|":
+    wc -l *.pdb | sort -n
+    Replaces the need to to:
+        wc -l *.pdb > lengths.txt 
+        sort lengths.txtgit config --global core.editor "nano"
+    Can also use multiple pipes:
+        wc -l *.pdb | sort -n | head -n 3 (displays the top three files, i.e. the three with the least lines)
+    
+    cd ../data
+    cat animals.txt
+    cat animals.txt | head -n 5 | tail -n 3 | sort -r > final.txt
+    
+cd ../north-pacific-gyre/
+cd 2012-07-03/
+wc -l *.txt | sort -n | head -n 5
+
+cd ../../
+cd creatures
+
+Loops:
+    for filename in basilisk.dat unicorn.dat
+    do
+        head -n 2 $filename | tail -n 1
+    done
+    same thing in a single row: for filename in basilisk.dat unicorn.dat; do head -n 2 $filename | tail -n 1; done
+    
+    cd ../molecules
+    for filename in *.pdb
+    do
+        echo $filename
+        wc -l $filename
+    done
+
+Avoid spaces in file names:
+	cd ../creatures
+	cat unicorn.dat > "red unicorn.txt"
+	for filename in "red unicorn.txt" unicorn.dat
+	do
+	    wc -l $filename
+	done
+	
+Go to start of line: ctrl+a
+Go to end of line: ctrl+e
+
+See previous commands: history
+Run line 711 again: !711
+
+cd ../north-pacific-gyre/2012-07-03/
+bash goostats NENE01729A.txt test.txt
+cat test.txt
+
+nano run_stats.sh 
+for filename in *.txt
+do
+    echo $filename
+done
+
+ctrl+o
+enter
+ctrl+x
+
+bash run_stats.sh
+
+To continue the shell lesson on your own start here: http://swcarpentry.github.io/shell-novice/06-script/index.html
+
+
+Git/GitHub
+local version control: https://slides.com/abostroem/local_version_control
+remote version control: 
+    https://slides.com/abostroem/collaborating_using_git
+
+git config --global user.name "Your Name"
+git config --global user.email "YourEmail@email.edu"
+git config --global color.ui "auto"
+git config --global core.editor "nano" 
+
+git config --list
+
+cd
+navigate to some directory you want to put a new repository
+mkdir planets
+cd planets
+git init
+
+git status
+
+nano mars.txt
+cold and dry but everything is my favorite color
+ctrl+o
+enter
+ctrl+x
+
+git status
+git add mars.txt
+git status
+
+git commit -m "starting to think about mars"
+git status
+
+nano jupiter.txt
+write something in the file, save and exit nano
+
+git status
+git add jupiter.txt
+git commit -m "some comment about this file"
+
+git log
+
+change mars.txt
+git diff mars.txt
+git add mars.txt
+git commit -m "some comment"
+
+git status
+git log -2 ("-2" means look at the last 2 entries in the log)
+
+git diff
+git diff HEAD~1
+git diff HEAD~2
+
+Recovering older versions:
+    overwrite mars.txt
+    git checkout HEAD mars.txt
+    git checkout -- mars.txt
+    git status
+
+Go to github.com and create an account or sign into your account
+
+Create new repository on github called "planets". 
+
+git remote add URL_OF_REMOTE_REPOSITORY
+git push -u origin master

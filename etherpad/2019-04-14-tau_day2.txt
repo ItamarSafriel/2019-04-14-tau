@@ -1,0 +1,221 @@
+
+ΩWelcome to The Carpentries Etherpad!
+This pad is synchronized as you type, so that everyone viewing this page sees the same text. This allows you to collaborate seamlessly on documents.
+Use of this service is restricted to members of The Carpentries community; this is not for general purpose use (for that, try etherpad.wikimedia.org).
+Users are expected to follow our code of conduct: https://docs.carpentries.org/topic_folders/policies/code-of-conduct.html
+All content is publicly available under the Creative Commons Attribution License: https://creativecommons.org/licenses/by/4.0/
+
+21st Century Software and Data Analysis Tools for Physics and Astronomy
+References:
+	* This document: https://pad.carpentries.org/2019-04-14-tau
+	* Our course website: https://abostroem.github.io/2019-04-14-tau/
+	* SWC lessons (shell, git, python(ish)): https://software-carpentry.org/lessons/
+	* Our course repository: https://github.com/abostroem/2019-04-14-tau
+	* https://slides.com/abostroem/shell-exercises
+
+To continue the shell lesson on your own start here: http://swcarpentry.github.io/shell-novice/06-script/index.html
+
+local version control: https://slides.com/abostroem/local_version_control
+remote version control: 
+    https://slides.com/abostroem/collaborating_using_git
+
+git clone https://github.com/abostroem/2019-04-14-tau.git
+
+Monday - Python
+
+From the repository main directory:
+cd code/python/
+jupyter notebook
+(the notebook should open in your web browser)
+
+New > Notebook (Python 3)
+Click "untitled" and give it a name that's not "master plan".
+
+When in edit mode, escape (puts you in command mode), then: 
+    "a" will add a cell above
+    "b" will add a cell below
+    "m" will make the cell a "markdown" cell (i.e. explanatory text, not code)
+    "y" will make it a code cell.
+    shift+enter will run the code in the cell
+    "dd" deletes a cell (irreversible) 
+    
+For a markdown cell:
+    headings start with "# "
+    sub headings with "## "
+    bullets with "-", "*", or most other symbols
+    LaTeX equations also work
+    HTML also works (links, etc)
+    execute with shift+enter and it will render
+        
+To exit the notebook:
+    Save with the save icon
+    Close the tab
+    Ctrl+c twice on the terminal
+    
+Shell commands (like "cat") can be exectued from the notebook directly (some require a ! before, e.g. !cat). 
+    
+import math
+help(math)
+Auto complete typing math. and then tab then conitnue typing to narrow down the options.
+
+Strings can be specified with single or double (or even triple) quotes, just need to be consistent with what is used to open and close the same string. 
+"+" for strings means concatenate. 
+
+Python is zero-indexed (indexes start at 0)!
+negative indexing: -1 is the last value, -2 is the one before last, etc.
+
+[ ] for indexing
+( ) for functions (or tuples)
+{ } for dictionaries
+
+import numpy as np
+
+help(np.mean)
+np.mean?
+
+np.mean(my_array) <-- funciton
+my_array.mean() <-- method
+my_array.size <-- attrbitue
+
+If your Juyter notebook is in right-to-left mode, your arrays might look weird. 
+To fix that: 
+    Control + Shift + f (or command+shift+f on a mac)
+    type "rtl" to find the "toggle rtl layout" and click that option
+
+Loops:
+    for item in container:
+        command
+        command
+    command not in the loop (because not indented)
+Note that indentation is important - it defined what's in the loop!
+
+Similarly for conditional statements: 
+    if condition:
+        command
+        command
+    else:
+        command
+    command not in the condition (because not indented)
+Here too indentation is important. 
+is equal: ==
+is not equal: !=
+
+Commenting in python is done with a "#" sign
+
+Doc strings are documentation comments at the beginning of a function identified by triple quotes (""" or ''') on either side. 
+These comments will be displayed when a user runs help on your function (e.g. help(my_function) will print out the doc string). 
+
+Example of a function with a doc string:
+
+def calc_mean(my_container):    
+        """ 
+        calculate the mean of a list or array
+        Parameters
+        ----------
+        my_container: list or arr
+            list or array of numbers
+               
+        Returns
+        --------
+        mean: flt
+            the mean of the input container
+        total: flt
+            the sum of all values in the container
+        """    
+        
+        total = 0
+        for number in my_container:
+            total = total+number
+        mean = total/len(my_container)
+        return mean, total
+
+Style and best practices guide - PEP (Python Enhancement Proposal):
+https://www.python.org/dev/peps/pep-0008/
+
+Astropy pacakge (not just for astronomy - for e.g has functions for reading and writing tables of data, converting units, fitting data, smoothing): http://docs.astropy.org/en/stable/
+Training videos for this package are here: https://webcast.stsci.edu/webcast/searchresults.xhtml?searchtype=20&eventid=247&sortmode=2
+Traning notebooks: https://github.com/spacetelescope/JWSTUserTraining2016
+
+filename = '../../data/python/hubble_data.dat' 
+tbdata = Table.read(filename,
+                     names=['galaxy', 'supernova',
+                                             'm', 'sig_m',
+                                              'dist_mod', 'sig_dist_mod',                          
+                                              'M', 'sig_M',                          
+                                              'velocity'],                   
+                                              format='ascii')
+
+Copy and paste for script:
+from astropy.table import Table
+import numpy as np
+from matplotlib import pyplot as plt
+
+def find_distance(dist_mod):
+    '''    find a distance given a distance modulus using m-M = 5log(d)-5
+    Parameters
+    -------------
+    dist_mod: array-like
+        distance modulus
+    
+    Returns
+    ----------
+    distance: array-like
+        distance is parsecs'''
+    dist = 10**((dist_mod+5)/5)
+    return dist
+
+def convert_to_mpc(dist_pc):
+    '''    Convert a distance or array of distances from parsecs to megaparsecs
+    
+    Parameters    
+    ----------
+    dist_pc: flt or array-like
+    distance in parsec            
+    
+    Returns    
+    --------    
+    dist_mpc: flt or array-like        
+        distance in megaparsecs    
+    '''    
+    dist_mpc = dist_pc/10**6    
+    return dist_mpc
+    
+
+#Most data from Riess et al, 2016, velocity data from NED 
+filename = '../../data/python/hubble_data.dat' 
+tbdata = Table.read(filename, names = ['galaxy',
+                                                'supernova',
+                                                'm', 'sig_m',
+                                                'dist_mod', 'sig_dist_mod',
+                                                'M', 'sig_M',
+                                               'velocity'],
+                              format='ascii')   
+dist_pc = find_distance(tbdata['dist_mod'])
+dist_mpc = convert_to_megaparsecs(dist_pc) 
+fit_vel = np.polyfit(dist_mpc, tbdata['velocity'], 1)  
+
+#Plot data with label 
+plt.plot(dist_mpc, tbdata['velocity'], 'o', label = 'Data') 
+#Plot fit with label 
+plt.plot(dist_mpc, np.polyval(fit_vel, dist_mpc), label = 'fit') 
+#Label axes 
+plt.xlabel('Distance (Mpc)') 
+plt.ylabel(r'Velocity ($\frac{km}{s}$)') #r means raw string 
+#Add legend 
+plt.legend(loc=2) 
+#Title 
+plt.title('Hubble Diagram') 
+#Save 
+plt.savefig('hubble_diagram.pdf') 
+
+To exit ipython:
+    exit()
+    or: ctrl+d
+    
+    
+jupyter notebook master_plan_plotting.ipynb
+
+Matplotlib 3D plotting: https://matplotlib.org/mpl_toolkits/mplot3d/tutorial.html
+
+Start downloading this right away! https://www.dropbox.com/s/o80up2k4h3z7uud/hipparcos.db?dl=0
+
