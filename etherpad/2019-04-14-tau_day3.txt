@@ -1,0 +1,86 @@
+
+ΩWelcome to The Carpentries Etherpad!
+This pad is synchronized as you type, so that everyone viewing this page sees the same text. This allows you to collaborate seamlessly on documents.
+Use of this service is restricted to members of The Carpentries community; this is not for general purpose use (for that, try etherpad.wikimedia.org).
+Users are expected to follow our code of conduct: https://docs.carpentries.org/topic_folders/policies/code-of-conduct.html
+All content is publicly available under the Creative Commons Attribution License: https://creativecommons.org/licenses/by/4.0/
+
+21st Century Software and Data Analysis Tools for Physics and Astronomy
+References:
+	* This document: https://pad.carpentries.org/2019-04-14-tau
+	* Our course website: https://abostroem.github.io/2019-04-14-tau/
+	* SWC lessons (shell, git, python(ish)): https://software-carpentry.org/lessons/
+	* Our course repository: https://github.com/abostroem/2019-04-14-tau
+	* https://slides.com/abostroem/shell-exercises
+	* Post workshop survey (please fill!): https://www.surveymonkey.com/r/swc_post_workshop_v1?workshop_id=2019-04-14-tau
+
+Shell:
+	To continue the shell lesson on your own start here: http://swcarpentry.github.io/shell-novice/06-script/index.html
+Version Control
+	local version control: https://slides.com/abostroem/local_version_control
+	remote version control: 
+	    https://slides.com/abostroem/collaborating_using_git
+Get the class repository
+	git clone https://github.com/abostroem/2019-04-14-tau.git
+Update your repository
+	cd 2019-04-14-tau
+	git pull origin gh-pages
+
+SQL
+Start downloading this right away! https://www.dropbox.com/s/o80up2k4h3z7uud/hipparcos.db?dl=0
+Presentation: https://github.com/abostroem/2019-04-14-tau/blob/gh-pages/files/sql/managing_data_with_sql.ipynb
+For list of commands type: .help
+For list of tables in database type: .tables
+The commands:
+     .mode column 
+     .headers on
+Make things readable
+
+To get the info on the table "data" type:
+PRAGMA table_info(data); 
+
+To select rows from this table use:
+    SELECT <name(s) of row> FROM <name of table> LIMIIT <number of rows you wish to see>
+You can add multiple conditions (e.g !=,=,<,>) using WHERE  - separated by AND
+
+Add ORDER BY <name of row> to sort results
+[default is ascending, for descending add DESC after row name]
+
+When joining tables, if there is a variable that appears in both tables you can identify a particular one by writing:
+    <table name>.<row name>
+    
+
+For later today, please install the astroquery module:
+	    conda install -c astropy astroquery
+To check if this worked:
+    python -c 'import astroquery'
+If nothing happens, that means it worked.
+
+jupyer notebook
+import sqlite3
+
+connection = sqlite3.connect("/Users/griffin/Downloads/hipparcos.db")
+
+to plot things in the Jupyter notebook, you need:
+    import matplotlib.pyplot as plt
+    %matplotlib inline
+    
+pip install --upgrade --pre astroquery
+
+Advanced Git Slides: https://slides.com/abostroem/open-source-workflow
+repository to fork: https://github.com/abostroem/code_review-tau
+branching demo: https://learngitbranching.js.org/?NODEMO
+
+Go to your workshop directory outside of any other repository. 
+git clone your_forked_repository_url
+cd code_review-tau
+
+git branch branch_name (creates a new branch)
+git checkout branch_name (puts you in then new branch)
+
+git branch (what branch are you on, which branches are available)
+
+git branch master (go back to master branch)
+git merge branch_name (merges changes from the new branch to master)
+
+
